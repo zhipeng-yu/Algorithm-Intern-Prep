@@ -1,4 +1,6 @@
 import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
 
 df = pd.read_csv('data/iris/Iris.csv')
 
@@ -106,3 +108,74 @@ print(grouped)
 count_grouped = df.groupby('Species').size()
 print("\n每种类别的数量:")
 print(count_grouped)
+
+
+
+# 1. 绘制直方图 (Histogram)
+
+# 假设你已经读取了数据到 df 变量中
+# df = pd.read_csv('your_data.csv')
+
+# bins 参数表示把数据分成多少个区间（柱子）
+plt.figure(figsize=(10, 6))  # 设置画布大小，可选
+
+# 绘制直方图：展示 'sepal length (cm)' 这一列数据的分布情况
+# 参数说明：
+# - df['sepal length (cm)']: 从 DataFrame 中提取要分析的数据列（花萼长度）
+# - bins=20: 将数据范围划分为 20 个区间（即画出 20 根柱子），数值越大柱子越细
+# - color='skyblue': 设置柱子的填充颜色为天蓝色
+# - edgecolor='black': 设置柱子边缘的颜色为黑色，让每根柱子界限更清晰
+plt.hist(df['SepalLengthCm'], bins=20, color='skyblue', edgecolor='black')
+
+# 2. 添加标题和标签（这是代码规范的重要部分！）
+# fontsize设置标题字体大小为 X
+plt.title('Distribution of Sepal Length', fontsize=16)
+# 设置 x 轴的标签（横坐标说明）
+plt.xlabel('Sepal Length (cm)', fontsize=12)
+# 设置 y 轴的标签（纵坐标说明）
+plt.ylabel('Frequency', fontsize=12)
+
+# 3. 显示图形
+plt.show()
+
+
+# 1. 绘制散点图 (Scatter Plot)
+# 创建一个新的图形窗口（Figure 对象），并设置其尺寸
+# figsize=(宽度, 高度)，单位是英寸（inches）
+plt.figure(figsize=(10, 6))
+
+
+# x轴放一个特征，y轴放另一个特征
+# 参数说明：
+# - df['sepal length (cm)']：作为 x 轴的数据，取自 DataFrame 中的 'sepal length (cm)' 列
+# - df['petal length (cm)']：作为 y 轴的数据，取自 DataFrame 中的 'petal length (cm)' 列
+# - alpha=0.6：设置散点的透明度（opacity），取值范围 [0, 1]
+# 0 = 完全透明，1 = 完全不透明；0.6 可以避免点重叠时完全遮挡，便于观察密度
+plt.scatter(df['SepalLengthCm'], df['PetalLengthCm'], alpha=0.6)
+
+# 2. 添加标题和标签
+# fontsize=16：指定标题字体大小为 16 磅（points）
+plt.title('Relationship between Sepal Length and Petal Length', fontsize=16)
+# 设置 x 轴的标签（横坐标说明）
+plt.xlabel('Sepal Length (cm)', fontsize=12)
+# 设置 y 轴的标签（纵坐标说明）
+plt.ylabel('Petal Length (cm)', fontsize=12)
+
+# 3. 显示图形
+plt.show()
+
+
+#绘制更美观的“配对图”
+#如果你想一次性看数据集中所有特征之间的关系，用 Matplotlib 要写很多循环，但 Seaborn 一行代码搞定。
+#import seaborn as sns
+
+# 1. 设置主题（Seaborn 的主题通常比默认的好看）
+sns.set(style="whitegrid")
+
+# 2. 绘制配对图 (Pairplot)
+# 这个图会自动对数据集中的每一对数值特征画散点图，对角线上画直方图
+# hue 参数可以让你根据类别（比如 Iris 的 Species）给点上色
+sns.pairplot(df, hue="Species")
+
+# 3. 显示图形
+plt.show()
