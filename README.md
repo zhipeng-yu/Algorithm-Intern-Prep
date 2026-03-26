@@ -37,6 +37,18 @@
   - `sns.boxplot()`：按类别分布箱线图
   - 配色与样式优化（`sns.set_style("whitegrid")`）
 
+  ### 🗓️ 2026/3/21 — titanic数据初步
+使用 [Kaggle Iris 数据集](https://www.kaggle.com/datasets/uciml/iris) 进行以下操作：
+- ✅ 用 `pd.read_csv()` 加载数据
+- ✅ 快速探索数据：
+  - `.head()`：查看前几行
+  - `.info()`：获取数据类型与缺失值概览
+  - `.describe()`：统计摘要（均值、标准差等）
+- ✅ 处理缺失值（本数据集无缺失，但练习了删除 `dropna()` 与填充 `fillna()` 方法）
+- ✅ 数据筛选与分组：
+  - 布尔索引（如 `df[df['species'] == 'setosa']`）
+  - `groupby()` 按类别统计（如各类别的平均花瓣长度）
+
 ---
 
 ## 🛠️ 技术栈
